@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="CampusPulse - an institute attendance and student operations dashboard.">
+  <title>CampusPulse | Institute Attendance Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-mark">CP</div>
+        <div><strong>CampusPulse</strong><span>Institute Operations</span></div>
+      </div>
+      <nav class="nav">
+        <a class="nav-link active" href="#dashboard">Dashboard</a>
+        <a class="nav-link" href="#students">Students</a>
+        <a class="nav-link" href="#attendance">Attendance</a>
+        <a class="nav-link" href="#about">About</a>
+      </nav>
+      <div class="sidebar-note"><span class="dot"></span>Browser-local data storage</div>
+    </aside>
+
+    <main class="content">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">Institute Management Tool</p>
+          <h1>Student Attendance Dashboard</h1>
+          <p class="subtitle">Manage a small institute roster and daily attendance without a backend.</p>
+        </div>
+        <label class="date-card">Attendance date<input id="attendanceDate" type="date"></label>
+      </header>
+
+      <section id="dashboard" class="stats-grid">
+        <article class="stat-card"><span>Total Students</span><strong id="totalStudents">0</strong><small>Active roster</small></article>
+        <article class="stat-card"><span>Present</span><strong id="presentCount">0</strong><small>Selected date</small></article>
+        <article class="stat-card"><span>Absent</span><strong id="absentCount">0</strong><small>Selected date</small></article>
+        <article class="stat-card"><span>Attendance Rate</span><strong id="attendanceRate">0%</strong><small>Present / total</small></article>
+      </section>
+
+      <section id="students" class="panel">
+        <div class="panel-heading">
+          <div><p class="eyebrow">Roster</p><h2>Add Student</h2></div>
+          <p>Register the minimum details needed for attendance.</p>
+        </div>
+        <form id="studentForm" class="student-form">
+          <label>Student name<input id="studentName" type="text" placeholder="e.g. Ayesha Khan" maxlength="60" required></label>
+          <label>Roll number<input id="rollNumber" type="text" placeholder="e.g. FSWD-024" maxlength="24" required></label>
+          <label>Program / batch<input id="program" type="text" placeholder="e.g. Full Stack Web Dev" maxlength="60" required></label>
+          <button class="button primary" type="submit">Add Student</button>
+        </form>
+      </section>
+
+      <section id="attendance" class="panel">
+        <div class="panel-heading attendance-heading">
+          <div><p class="eyebrow">Daily Operations</p><h2>Attendance Register</h2></div>
+          <div class="actions">
+            <button id="markAllPresent" class="button secondary" type="button">Mark all present</button>
+            <button id="exportCsv" class="button secondary" type="button">Export CSV</button>
+          </div>
+        </div>
+        <div class="toolbar">
+          <input id="searchInput" type="search" placeholder="Search name, roll no. or program...">
+          <select id="statusFilter">
+            <option value="all">All statuses</option>
+            <option value="present">Present</option>
+            <option value="absent">Absent</option>
+            <option value="unmarked">Unmarked</option>
+          </select>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Student</th><th>Roll No.</th><th>Program</th><th>Status</th><th class="right">Action</th></tr></thead>
+            <tbody id="studentTableBody"></tbody>
+          </table>
+          <div id="emptyState" class="empty-state" hidden>No students match the current filters.</div>
+        </div>
+      </section>
+
+      <section id="about" class="panel about-panel">
+        <div><p class="eyebrow">Project Purpose</p><h2>Why CampusPulse?</h2></div>
+        <p>CampusPulse is a student-built institute operations prototype demonstrating roster management, daily attendance, local persistence, filtering and CSV reporting with vanilla web technologies.</p>
+      </section>
+
+      <footer><span>CampusPulse</span><button id="resetDemo" class="text-button" type="button">Reset demo data</button></footer>
+    </main>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
